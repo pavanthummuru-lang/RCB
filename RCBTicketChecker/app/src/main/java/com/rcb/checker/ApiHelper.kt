@@ -7,8 +7,6 @@ import java.net.URL
 
 object ApiHelper {
 
-    private const val API_URL = "https://rcbscaleapi.ticketgenie.in/ticket/eventlist/O"
-
     data class Event(
         val name: String,
         val date: String,
@@ -24,9 +22,9 @@ object ApiHelper {
         val rawBody: String
     )
 
-    fun fetch(): FetchResult? {
+    fun fetch(apiUrl: String = "https://rcbscaleapi.ticketgenie.in/ticket/eventlist/O"): FetchResult? {
         return try {
-            val url = URL(API_URL)
+            val url = URL(apiUrl)
             val connection = url.openConnection() as HttpURLConnection
             connection.apply {
                 requestMethod = "GET"
@@ -41,8 +39,7 @@ object ApiHelper {
                 )
             }
 
-            val responseCode = connection.responseCode
-            if (responseCode != 200) {
+            if (connection.responseCode != 200) {
                 connection.disconnect()
                 return null
             }
@@ -53,19 +50,16 @@ object ApiHelper {
             val json = JSONObject(body)
             val resultArray: JSONArray = json.optJSONArray("result") ?: JSONArray()
 
-            val events = mutableListOf<Event>()
-            for (i in 0 until resultArray.length()) {
+            val events = (0 until resultArray.length()).map { i ->
                 val e = resultArray.getJSONObject(i)
-                events.add(
-                    Event(
-                        name = e.optString("event_Name", ""),
-                        date = e.optString("event_Display_Date", ""),
-                        status = e.optString("event_Button_Text", ""),
-                        price = e.optString("event_Price_Range", "N/A"),
-                        venue = e.optString("venue_Name", ""),
-                        team1 = e.optString("team_1", ""),
-                        team2 = e.optString("team_2", "")
-                    )
+                Event(
+                    name = e.optString("event_Name", ""),
+                    date = e.optString("event_Display_Date", ""),
+                    status = e.optString("event_Button_Text", ""),
+                    price = e.optString("event_Price_Range", "N/A"),
+                    venue = e.optString("venue_Name", ""),
+                    team1 = e.optString("team_1", ""),
+                    team2 = e.optString("team_2", "")
                 )
             }
 

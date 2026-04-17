@@ -1,114 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#1a1a1a"
-    android:padding="24dp"
-    android:gravity="center">
+    android:background="#1a1a1a">
 
-    <!-- Logo / Title -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="🏏 RCB Ticket Checker"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RCB vs GT — Apr 24, 2026"
-        android:textSize="14sp"
-        android:textColor="#CC0000"
-        android:layout_marginBottom="40dp" />
-
-    <!-- Status Card -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#2a2a2a"
-        android:padding="20dp"
-        android:layout_marginBottom="32dp">
+        android:padding="20dp">
 
-        <!-- Status Indicator -->
+        <!-- Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RCB Ticket Checker"
+            android:textSize="22sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Watching for RCB vs GT — Apr 24, 2026"
+            android:textSize="13sp"
+            android:textColor="#CC0000"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Status Card -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="8dp">
+            android:orientation="vertical"
+            android:background="#2a2a2a"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
 
-            <View
-                android:id="@+id/statusIndicator"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:background="@android:drawable/presence_online"
-                android:layout_marginEnd="10dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="6dp">
+
+                <View
+                    android:id="@+id/statusIndicator"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:background="#CC0000"
+                    android:layout_marginEnd="10dp" />
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NOT MONITORING"
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvStatus"
+                android:id="@+id/tvSubStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NOT MONITORING"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
+                android:text="Configure below then tap Start"
+                android:textSize="12sp"
+                android:textColor="#AAAAAA" />
         </LinearLayout>
 
+        <!-- Action Buttons -->
+        <Button
+            android:id="@+id/btnStartStop"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="START CHECKER"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:backgroundTint="@color/green"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnStopAlarm"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="STOP ALARM"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FF6600"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnBuyTickets"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="BUY TICKETS NOW"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#CC0000"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Config Section -->
+        <LinearLayout
+            android:id="@+id/configLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#2a2a2a"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CONFIGURATION"
+                android:textSize="12sp"
+                android:textColor="#888888"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <!-- API URL -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="API URL"
+                android:textSize="12sp"
+                android:textColor="#AAAAAA"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/etApiUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#555555"
+                android:hint="https://rcbscaleapi.ticketgenie.in/..."
+                android:background="#333333"
+                android:padding="10dp"
+                android:textSize="12sp"
+                android:inputType="textUri"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Check Interval -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CHECK INTERVAL (seconds)"
+                android:textSize="12sp"
+                android:textColor="#AAAAAA"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/etCheckInterval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:hint="60"
+                android:background="#333333"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:inputType="number"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Report Interval -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STATUS REPORT INTERVAL (minutes)"
+                android:textSize="12sp"
+                android:textColor="#AAAAAA"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/etReportInterval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:hint="30"
+                android:background="#333333"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:inputType="number"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Watch Keyword -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ALARM TRIGGER KEYWORD (e.g. Gujarat)"
+                android:textSize="12sp"
+                android:textColor="#AAAAAA"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/etWatchKeyword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:hint="Gujarat"
+                android:background="#333333"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnSaveConfig"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:text="SAVE CONFIG"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#444444" />
+        </LinearLayout>
+
+        <!-- Info -->
         <TextView
-            android:id="@+id/tvSubStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tap Start to begin"
-            android:textSize="13sp"
-            android:textColor="#AAAAAA" />
+            android:text="App keeps running in background even when closed.\nAlarm repeats every 5s — tap STOP ALARM to silence.\nAuto-stops after Apr 24, 2026."
+            android:textSize="11sp"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp" />
+
     </LinearLayout>
-
-    <!-- Start / Stop Button -->
-    <Button
-        android:id="@+id/btnStartStop"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="START CHECKER"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:backgroundTint="@color/green"
-        android:layout_marginBottom="12dp" />
-
-    <!-- Stop Alarm Button -->
-    <Button
-        android:id="@+id/btnStopAlarm"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="STOP ALARM"
-        android:textSize="14sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#FF6600"
-        android:layout_marginBottom="12dp" />
-
-    <!-- Buy Tickets Button -->
-    <Button
-        android:id="@+id/btnBuyTickets"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="BUY TICKETS NOW"
-        android:textSize="14sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#CC0000"
-        android:layout_marginBottom="32dp" />
-
-    <!-- Info -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alerts you when:\n• GT match is added\n• Any new match added\n• Ticket status changes\n• Every 30 min status report\n\nAlarm repeats every 5 seconds\nuntil you tap STOP ALARM"
-        android:textSize="12sp"
-        android:textColor="#888888"
-        android:gravity="center" />
-
-</LinearLayout>
+</ScrollView>
