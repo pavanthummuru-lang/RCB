@@ -18,18 +18,30 @@ jobs:
 
       - uses: android-actions/setup-android@v3
 
+      - name: Find project root
+        run: |
+          echo "Repo contents:"
+          ls -la
+          SETTINGS=$(find . -name "settings.gradle.kts" | head -1)
+          echo "Found: $SETTINGS"
+          PROJECT_DIR=$(dirname "$SETTINGS")
+          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
+
       - name: Generate Gradle Wrapper
         run: gradle wrapper --gradle-version=8.4
+        working-directory: ${{ env.PROJECT_DIR }}
 
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
+        run: chmod +x gradlew
+        working-directory: ${{ env.PROJECT_DIR }}
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug
+        working-directory: ${{ env.PROJECT_DIR }}
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: RCBTicketChecker-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: "**/app/build/outputs/apk/debug/app-debug.apk"
           retention-days: 30
